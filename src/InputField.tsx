@@ -1,20 +1,30 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 
 interface Props {
   todo: string;
   setTodo: React.Dispatch<React.SetStateAction<string>>;
+  handleAddTodo: () => void;
 }
-function InputField({ todo, setTodo }: Props) {
+function InputField({ todo, setTodo, handleAddTodo }: Props) {
   return (
-    <TextField
-      id="newTask"
-      label="New Task"
-      placeholder="Enter new task"
-      variant="outlined"
-      value={todo}
-      onChange={(event) => setTodo(event.target.value)}
-    />
+    <form onSubmit={handleAddTodo}>
+      <Stack spacing={2} direction="row">
+        <TextField
+          id="newTask"
+          label="New Task"
+          placeholder="Enter new task"
+          variant="outlined"
+          value={todo}
+          onChange={(event) => setTodo(event.target.value)}
+        />
+        <Button variant="contained">Add</Button>
+      </Stack>
+    </form>
   );
 }
 
