@@ -4,8 +4,9 @@ import Stack from '@mui/material/Stack';
 
 import Typography from '@mui/material/Typography';
 
-import InputField from './InputField';
+import InputField from './components/InputField';
 import { Todo } from './models/todo';
+import TodoList from './components/TodoList';
 
 const App = () => {
   const [todo, setTodo] = useState<string>('');
@@ -14,8 +15,12 @@ const App = () => {
   const handleAddTodo = (event: React.FormEvent) => {
     event.preventDefault();
 
-    if (todo) {
-      setTodos([...todos, { id: Date.now(), todo, isDone: false }]);
+    if (todo.trim() !== '') {
+      setTodos([
+        ...todos,
+        { id: Date.now(), todo: todo.trim(), isDone: false },
+      ]);
+      setTodo('');
     }
   };
 
@@ -28,6 +33,8 @@ const App = () => {
       </Typography>
 
       <InputField todo={todo} setTodo={setTodo} handleAddTodo={handleAddTodo} />
+
+      <TodoList />
     </Stack>
   );
 };
