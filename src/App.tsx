@@ -11,7 +11,15 @@ const App = () => {
   const [todo, setTodo] = useState<string>('');
   const [todos, setTodos] = useState<Todo[]>([]);
 
-  const handleAddTodo: () => void = () => {};
+  const handleAddTodo = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    if (todo) {
+      setTodos([...todos, { id: Date.now(), todo, isDone: false }]);
+    }
+  };
+
+  console.log(todos);
 
   return (
     <Stack spacing={2} alignItems={'center'}>

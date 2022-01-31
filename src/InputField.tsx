@@ -1,14 +1,13 @@
 import React from 'react';
+
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 
 interface Props {
   todo: string;
   setTodo: React.Dispatch<React.SetStateAction<string>>;
-  handleAddTodo: () => void;
+  handleAddTodo: (event: React.FormEvent) => void;
 }
 function InputField({ todo, setTodo, handleAddTodo }: Props) {
   return (
@@ -22,7 +21,9 @@ function InputField({ todo, setTodo, handleAddTodo }: Props) {
           value={todo}
           onChange={(event) => setTodo(event.target.value)}
         />
-        <Button variant="contained">Add</Button>
+        <Button variant="contained" type="submit">
+          Add
+        </Button>
       </Stack>
     </form>
   );
