@@ -34,7 +34,7 @@ const App = () => {
 
       <InputField todo={todo} setTodo={setTodo} handleAddTodo={handleAddTodo} />
 
-      <TodoList />
+      <TodoList todos={todos} setTodos={setTodos} />
     </Stack>
   );
 };
