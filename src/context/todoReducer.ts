@@ -12,24 +12,26 @@ const TodoReducer = (
   switch (type) {
     case types.ADD_TODO:
       newTodos = [...state.todos, payload];
-      return { todos: newTodos };
+      return { ...state, todos: newTodos };
 
     case types.DELETE_TODO:
       newTodos = state.todos.filter((td) => td.id !== payload.id);
-      return { todos: newTodos };
+      return { ...state, todos: newTodos };
 
     case types.UPDATE_TODO:
       const index = state.todos.findIndex((td) => td.id === payload.id);
       if (index !== -1) {
         if (index === 0) {
-          return { todos: [payload, ...state.todos.slice(1)] };
+          return { ...state, todos: [payload, ...state.todos.slice(1)] };
         }
+        newTodos = [
+          ...state.todos.slice(0, index),
+          payload,
+          ...state.todos.slice(index + 1),
+        ];
         return {
-          todos: [
-            ...state.todos.slice(0, index - 1),
-            payload,
-            ...state.todos.slice(index + 1),
-          ],
+          ...state,
+          todos: newTodos,
         };
       }
       return state;

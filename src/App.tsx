@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React from 'react';
 import Stack from '@mui/material/Stack';
 
 import Typography from '@mui/material/Typography';
@@ -6,7 +6,6 @@ import Typography from '@mui/material/Typography';
 import InputField from './components/InputField';
 import TodoList from './components/TodoList';
 import TodoState from './context/todoState';
-import TodoContext from './context/todoContext';
 
 const App: React.FC = () => {
   return (

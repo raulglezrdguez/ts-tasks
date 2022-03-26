@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react';
+import React, { useCallback, useContext, useRef, useState } from 'react';
 
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
@@ -12,20 +12,24 @@ function InputField() {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
+  const handleSubmit = useCallback(
+    (event: React.FormEvent) => {
+      event.preventDefault();
 
-    const newTodo: Todo = {
-      id: Date.now(),
-      todo: inputRef.current ? inputRef.current.value : '',
-      isDone: false,
-    };
+      const newTodo: Todo = {
+        id: Date.now(),
+        todo: inputRef.current ? inputRef.current.value : '',
+        isDone: false,
+      };
 
-    addTodo(newTodo);
+      addTodo(newTodo);
 
-    inputRef.current?.focus();
-    // inputRef.current?.blur();
-  };
+      setTodo('');
+      inputRef.current?.focus();
+      // inputRef.current?.blur();
+    },
+    [addTodo]
+  );
 
   return (
     <form onSubmit={handleSubmit}>
