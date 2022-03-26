@@ -1,13 +1,17 @@
-import React from 'react';
-import { Todo } from '../models/todo';
+import React, { useContext } from 'react';
+import TodoContext from '../context/todoContext';
+import TodoItem from './TodoItem';
 
-interface Props {
-  todos: Todo[];
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
-}
+const TodoList: React.FC = () => {
+  const { todos } = useContext(TodoContext);
 
-const TodoList: React.FC<Props> = ({ todos, setTodos }: Props) => {
-  return <div>TodoList works</div>;
+  return (
+    <div>
+      {todos.map((td) => (
+        <TodoItem key={td.id} todo={td} />
+      ))}
+    </div>
+  );
 };
 
 export default TodoList;

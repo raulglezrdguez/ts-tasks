@@ -1,25 +1,30 @@
-import React, { useRef } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import TodoContext from '../context/todoContext';
+import { Todo } from '../models/todo';
 
-interface Props {
-  todo: string;
-  setTodo: React.Dispatch<React.SetStateAction<string>>;
-  handleAddTodo: (event: React.FormEvent) => void;
-}
+function InputField() {
+  const { addTodo } = useContext(TodoContext);
+  const [todo, setTodo] = useState('');
 
-function InputField({ todo, setTodo, handleAddTodo }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    handleAddTodo(event);
+    const newTodo: Todo = {
+      id: Date.now(),
+      todo: inputRef.current ? inputRef.current.value : '',
+      isDone: false,
+    };
 
-    // inputRef.current?.focus();
-    inputRef.current?.blur();
+    addTodo(newTodo);
+
+    inputRef.current?.focus();
+    // inputRef.current?.blur();
   };
 
   return (
