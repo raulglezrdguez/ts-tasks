@@ -18,6 +18,7 @@ function InputField({ todo, setTodo, handleAddTodo }: Props) {
 
     handleAddTodo(event);
 
+    // inputRef.current?.focus();
     inputRef.current?.blur();
   };
 
@@ -25,7 +26,7 @@ function InputField({ todo, setTodo, handleAddTodo }: Props) {
     <form onSubmit={handleSubmit}>
       <Stack spacing={2} direction="row">
         <TextField
-          ref={inputRef}
+          inputRef={inputRef}
           id="newTask"
           label="New Task"
           placeholder="Enter new task"
